@@ -14,10 +14,9 @@ class ThreadsController extends Controller
      */
     public function index()
     {
-        dd('test');
         $threads = Thread::latest()->get();
 
-        return view('threads.index', compact($threads));
+        return view('threads.index', compact('threads'));
     }
 
     /**
@@ -38,7 +37,13 @@ class ThreadsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $thread = new Thread([
+            'user_id' => auth()->id(),
+            'title' => $request['title'],
+            'body' => $request['body']
+        ]);
+
+        return redirect($thread->path());
     }
 
     /**
@@ -49,7 +54,7 @@ class ThreadsController extends Controller
      */
     public function show(Thread $thread)
     {
-        //
+        return view('threads.show', compact('thread'));
     }
 
     /**
