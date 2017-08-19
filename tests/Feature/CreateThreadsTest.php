@@ -22,10 +22,9 @@ class CreateThreadsTest extends TestCase
         $this->post('/threads', $thread->toArray());
 
         // Then, then we visit the thread page.
-        $response = $this->get($thread->path());
-
         // We should see the new thread
-        $response->assertSee($thread->title)
+        $this->get($thread->path())
+                ->assertSee($thread->title)
                 ->assertSee($thread->body);
     }
 

@@ -37,7 +37,7 @@ class ThreadsController extends Controller
      */
     public function store(Request $request)
     {
-        $thread = new Thread([
+        $thread = Thread::create([
             'user_id' => auth()->id(),
             'title' => $request['title'],
             'body' => $request['body']
