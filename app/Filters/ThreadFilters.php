@@ -8,8 +8,12 @@ use App\User;
 
 class ThreadFilters extends Filters
 {
-
-    protected $filters = ['by'];
+    /**
+     * Registered filters to operate upon.
+     *
+     * @var array
+     */
+    protected $filters = ['by', 'popular'];
 
     /**
      * Filter the query by a given username.
@@ -22,6 +26,18 @@ class ThreadFilters extends Filters
         $user = User::where('name', $username)->first();
 
         return $this->builder->where('user_id', $user->id);
+    }
+
+    /**
+     * Filter by query according to most popular threads.
+     *
+     * @return mixed
+     */
+    protected function popular()
+    {
+        $this->builder->getQuery()->orders = [];
+
+        return $this->builder->orderBy('replies_count', 'desc');
     }
 
 }

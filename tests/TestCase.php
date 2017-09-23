@@ -38,7 +38,7 @@ abstract class TestCase extends BaseTestCase
         });
     }
 
-    protected function withExceptionHandler()
+    protected function withExceptionHandling()
     {
         $this->app->instance(ExceptionHandler::class, $this->oldExceptionHandler);
 

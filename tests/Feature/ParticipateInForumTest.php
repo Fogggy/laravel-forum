@@ -40,7 +40,7 @@ class ParticipateInForumTest extends TestCase
     /** @test */
     function a_reply_requires_a_body()
     {
-        $this->signIn()->withExceptionHandler();
+        $this->signIn()->withExceptionHandling();
 
         $thread = create('App\Thread');
         $reply = make('App\Reply', ['body' => null]);

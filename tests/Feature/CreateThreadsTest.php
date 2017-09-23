@@ -14,7 +14,7 @@ class CreateThreadsTest extends TestCase
     /** @test */
     function guests_may_not_create_threads()
     {
-        $this->withExceptionHandler();
+        $this->withExceptionHandling();
 
         $this->get('/threads/create')
             ->assertRedirect('/login');
@@ -67,9 +67,13 @@ class CreateThreadsTest extends TestCase
             ->assertSessionHasErrors('body');
     }
 
+    /**
+     * @param array $overrides
+     * @return \Illuminate\Foundation\Testing\TestResponse
+     */
     function publishThread($overrides = [])
     {
-        $this->signIn()->withExceptionHandler();
+        $this->signIn()->withExceptionHandling();
 
         $thread = make('App\Thread', $overrides);
 
